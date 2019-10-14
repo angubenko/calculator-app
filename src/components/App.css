@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.ButtonGroup {
+  display: inline-block;
+}
+
+.ButtonGroup > .Button {
+  width: 25%;
+}
+
+.Display {
+  background-color: lightblue;
+  max-width: fit-content;
+  height: 25px;
+  font-size: 20px;
+  text-align: right;
+}
