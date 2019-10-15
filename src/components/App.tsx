@@ -5,29 +5,37 @@ import {ButtonGroup} from "./ButtonGroup";
 
 interface State {
     displayValue: string
-    prev: string
-    prev_prev: string
+    first_value: string
+    op: string
 }
 
 class App extends React.Component<Object, State> {
     state: Readonly<State> = {
         displayValue: "",
-        prev: "",
-        prev_prev: "",
+        first_value: "",
+        op: "",
     };
-
-    private setDisplayValue = (newValue: string) => {
-        this.setState({displayValue: newValue})
-    }
 
     public onClick = (name: string) => {
         let operations = new Set(["+", "-", "*", "%"])
-        if (name in operations){
-            this.setState({prev_prev: this.state.prev, prev: name})
-        } else if(this.state.prev_prev !== ""){
-
+        if (operations.has(name)) {
+            if (this.state.first_value !== ""){
+                this.setState({op: name})
+            }
+        } else {
+            if (this.state.first_value !== "" && this.state.op !== ""){
+                if (this.state.op === "+"){
+                    let result = String(Number(this.state.first_value) + Number(name))
+                    this.setState({first_value: result, displayValue: result, op: ""})
+                } else if (this.state.op === "-") {
+                    let result = String(Number(this.state.first_value) - Number(name))
+                    this.setState({first_value: result, displayValue: result, op: ""})
+                }
+            } else {
+                this.setState({first_value: name, displayValue: name})
+            }
         }
-    }
+    };
 
 
     render() {
